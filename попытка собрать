@@ -15,9 +15,31 @@ class MurderStatsManager:
                 }
             }
         }
-def add_data(self, continent, country, city, count):
+    def add_data(self, continent, country, city, count):
         if continent not in self.data:
             self.data[continent] = {}
         if country not in self.data[continent]:
             self.data[continent][country] = {}
         self.data[continent][country][city] = count
+
+    def get_stats(self):
+        return self.data
+
+    def get_city_stats(self, continent, country, city):
+        return self.data.get(continent).get(country).get(city)
+
+    def remove_city(self, continent, country, city):
+        try:
+            del self.data[continent][country][city]
+            if not self.data[continent][country]:
+                del self.data[continent][country]
+            if not self.data[continent]:
+                del self.data[continent]
+        except KeyError:
+            print("Город не найден.")
+
+
+
+
+print(" \nпроверка:")
+print(stats.get_stats())
