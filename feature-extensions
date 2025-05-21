@@ -1,5 +1,9 @@
-    def get_stats(self):
-        return self.data
-
-    def get_city_stats(self, continent, country, city):
-        return self.data.get(continent).get(country).get(city)
+    def remove_city(self, continent, country, city):
+        try:
+            del self.data[continent][country][city]
+            if not self.data[continent][country]:
+                del self.data[continent][country]
+            if not self.data[continent]:
+                del self.data[continent]
+        except KeyError:
+            print("Город не найден.")
